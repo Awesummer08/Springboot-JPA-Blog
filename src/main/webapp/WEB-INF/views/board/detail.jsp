@@ -12,11 +12,7 @@
 				<a href="/board/${board.id}/updateForm"  class="btn btn-warning">수정</a>
 				<button id="btn-delete" button class="btn btn-danger">삭제</button>
 			</c:if>
-			
-			<!--
-			<a href="/board/${board.id}/updateForm" class="btn btn-warning">수정</button>
-			 -->
-			 
+		
 			<br /><br />
 			<div>
 				글 번호:  <span id="id"><i>${board.id} </i></span>
@@ -35,10 +31,16 @@
 			<hr />
 			
 			<div class="card">
-				<div class="d-flex justify-content-between">
-					<div class="card-body"><textarea class="form-control" rows="1"></textarea></div>
-					<div class="card-footer"><button class="btn btn-primary">등록</button></div>
-				</div>
+				<form>
+					<input type="hidden" id="userId" value=${principal.user.id} />
+					<input type="hidden" id="boardId" value=${board.id} />
+					<div class="card-body">
+						<textarea id="reply-content" class="form-control" rows="1"></textarea>
+					</div>
+					<div class="card-footer">
+						<button type="button" id="btn-reply-save" class="btn btn-primary">등록</button>
+					</div>
+				</form>
 			</div>
 			
 			
@@ -51,7 +53,7 @@
 								<div>${reply.content}</div>
 								<div class="d-flex">
 									<div class="font-italic">작성자 : ${reply.user.username} &nbsp;</div>
-									<button  class="badge">삭제</button>
+									<button  onClick="index.replyDelete(${board.id}, ${reply.id})" class="badge">삭제</button>
 								</div>
 							</li>
 							
